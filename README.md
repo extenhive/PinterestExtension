@@ -18,7 +18,7 @@ You can enable this by checking the "Fetch Visit Site Links" checkbox, but this 
 
 **One-click setup: Install, click “Backup Board,” and let it run—no manual downloading or scripting required.**
 
-<br><br> <br><br>
+<br><br> 
 
 **Step 1: Download and unzip the PinterestExtension code.**
 

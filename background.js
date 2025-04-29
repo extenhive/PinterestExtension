@@ -1,0 +1,1 @@
+chrome.runtime.onMessage.addListener(((e,o,a)=>{"download"===e.type&&chrome.downloads.download({url:e.url,filename:e.filename,saveAs:!1})}));

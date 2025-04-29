@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Pinterest Board Downloader",
+  "version": "1.0",
+  "description": "Download all pins from a Pinterest board, including sections",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://*.pinterest.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.pinterest.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+} 

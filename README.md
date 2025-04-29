@@ -8,18 +8,6 @@
 You can enable this by checking the "Fetch Visit Site Links" checkbox, but this will increase download time.**
 <br><br>
 
-**FEATURES** 
-
-**Backs up everything: Downloads full-size images and captures all pin data (title, description, visit-site link, etc.).**
-
-**Organizes automatically: Creates a folder for each board and subfolders for sections, so your pins stay neatly structured.**
-
-**Exports to CSV: Generates a CSV listing Board Name, Section Name, Pin Title, Description, Visit Site Link, and Image Filename.**
-
-**One-click setup: Install, click “Backup Board,” and let it run—no manual downloading or scripting required.**
-
-<br><br> 
-
 **Step 1: Download and unzip the PinterestExtension code.**
 
 **Step 2: Open Chrome and navigate to chrome://extensions/.**
@@ -43,3 +31,15 @@ You can enable this by checking the "Fetch Visit Site Links" checkbox, but this 
 **Step 5: You're all set! 🎉**
 
 <img width="1421" alt="Screenshot 2025-04-28 at 11 15 52 PM" src="https://github.com/user-attachments/assets/fda93957-fa14-4365-b270-745e64402054" />
+
+<br><br>
+
+**FEATURES** 
+
+**Backs up everything: Downloads full-size images and captures all pin data (title, description, visit-site link, etc.).**
+
+**Organizes automatically: Creates a folder for each board and subfolders for sections, so your pins stay neatly structured.**
+
+**Exports to CSV: Generates a CSV listing Board Name, Section Name, Pin Title, Description, Visit Site Link, and Image Filename.**
+
+**One-click setup: Install, click “Backup Board,” and let it run—no manual downloading or scripting required.**

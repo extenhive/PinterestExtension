@@ -8,7 +8,8 @@
 You can enable this by checking the "Fetch Visit Site Links" checkbox, but this will increase download time.**
 <br><br>
 
-**Step 1: Download and unzip the PinterestExtension code.**
+**Step 1: Download and unzip the PinterestExtension code. (Green Dropdown in the top right)**
+<img width="936" alt="Screenshot 2025-04-29 at 12 13 17 AM" src="https://github.com/user-attachments/assets/72acdece-aaff-4d0c-9178-ff1ee586a39f" />
 
 **Step 2: Open Chrome and navigate to chrome://extensions/.**
 

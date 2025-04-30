@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showStatus('Verifying license...', 'success');
 
   try {
-    const response = await fetch("https://extenhub.com/api/verify?refresh=true", {
+    const response = await fetch("https://extenhub.com/api/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

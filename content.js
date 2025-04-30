@@ -25,34 +25,39 @@ function unslugify(slug) {
 }
 
 async function processPin(pin, boardName, sectionName) {
-  // pin.scrollIntoView();
   const img = pin.querySelector('img');
   const thumb = img?.src;
   if (!thumb || seenThumbs.has(thumb)) return false;
   seenThumbs.add(thumb);
 
-  const mainA = pin.querySelector('a[aria-label]');
-  const raw = mainA?.getAttribute('aria-label') || '';
-  const title = raw.replace(/ pin page$/i, '').trim();
-  const desc = img.alt || '';
+  // const footer = pin.querySelector('[data-test-id="pinrep-footer"]');
+  // const a = footer?.querySelector('a[aria-label][href^="/pin/"]');
+  // const title = a?.textContent?.trim() || '';
+  // const pinLink = a ? new URL(a.getAttribute('href'), location.origin).href : '';
+
+  const footer = pin.querySelector('[data-test-id="pinrep-footer"]');
+  const a = footer?.querySelector('a[href^="/pin/"]');
+  const title = a?.textContent?.trim() || '';
+  const pinLink = a ? new URL(a.getAttribute('href'), location.origin).href : '';
   const thumbName = thumb.split('/').pop().split('?')[0];
-  const pinLink = mainA?.href || '';
 
   pinsMap.set(thumb, {
     title,
-    description: desc,
+    description: '', // ← placeholder — will be filled later
     pinLink,
     thumbName,
     board: boardName,
     section: sectionName
   });
-
+  
   return true;
 }
 
 async function fetchVisitSite(pinUrl, index, total) {
-  console.log(`🔎 [${index}/${total}] Fetching Visit Site from: ${pinUrl}`);
+  chrome.runtime.sendMessage({ type: 'log', message: `Fetching Visit Site & Description` });
   
+  console.log(`🔎 [${index}/${total}] Fetching Visit Site & Description from: ${pinUrl}`);
+
   return new Promise((resolve) => {
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
@@ -61,13 +66,21 @@ async function fetchVisitSite(pinUrl, index, total) {
 
     iframe.onload = async () => {
       try {
-        const visitButton = iframe.contentDocument.querySelector('a[href^="http"]:not([href*="pinterest.com"])');
-        const visitLink = visitButton ? visitButton.href : '';
-        console.log(`✅ [${index}/${total}] Found Visit Site: ${visitLink || 'No link found'}`);
-        resolve(visitLink);
+        const doc = iframe.contentDocument;
+
+        // Visit Site link
+        const visitAnchor = doc.querySelector('[data-test-id="description-content-container"] a[href^="http"], a[href^="https"], a[href^="www"]');
+        const visitLink = visitAnchor?.href || '';
+
+        // Full description from span
+        const descSpan = doc.querySelector('[data-test-id="safeTextDirection"] span');
+        const longDesc = descSpan?.textContent?.trim() || '';
+  
+        console.log(`✅ [${index}/${total}] Visit: ${visitLink || 'None'}, Desc: ${longDesc.slice(0, 40)}...`);
+        resolve({ visitLink, longDesc });
       } catch (err) {
-        console.error(`❌ [${index}/${total}] Failed to fetch Visit Site`, err);
-        resolve('');
+        console.error(`❌ [${index}/${total}] Error fetching`, err);
+        resolve({ visitLink: '', longDesc: '' });
       } finally {
         document.body.removeChild(iframe);
       }
@@ -75,11 +88,12 @@ async function fetchVisitSite(pinUrl, index, total) {
 
     setTimeout(() => {
       try { document.body.removeChild(iframe); } catch {}
-      console.warn(`⏰ [${index}/${total}] Timeout fetching Visit Site`);
-      resolve('');
+      console.warn(`⏰ [${index}/${total}] Timeout`);
+      resolve({ visitLink: '', longDesc: '' });
     }, 7000);
   });
 }
+
 
 async function deepScroll(licenseVerified) {
   pinsMap.clear();
@@ -138,7 +152,7 @@ async function deepScroll(licenseVerified) {
 }
 
 
-async function downloadImages(boardName, sectionName, shouldFetchVisitSite) {
+async function downloadImages(boardName, sectionName) {
   const data = [];
   const allPins = Array.from(pinsMap.entries());
   
@@ -149,7 +163,7 @@ async function downloadImages(boardName, sectionName, shouldFetchVisitSite) {
 
   for (let i = 0; i < allPins.length && isDownloading; i++) {
     const [thumb, meta] = allPins[i];
-
+  
     let originals = thumb;
     if (thumb.includes('/236x/')) {
       originals = thumb.replace('/236x/', '/originals/');
@@ -157,13 +171,15 @@ async function downloadImages(boardName, sectionName, shouldFetchVisitSite) {
       originals = thumb.replace('/474x/', '/originals/');
     }
     const imageName = originals.split('/').pop().split('?')[0];
-
+  
     let visitSite = '';
-    if (meta.pinLink && shouldFetchVisitSite) {
-      visitSite = await fetchVisitSite(meta.pinLink, i + 1, allPins.length);
+    if (meta.pinLink) {
+      const result = await fetchVisitSite(meta.pinLink, i + 1, allPins.length);
+      visitSite = result.visitLink;
+      meta.description = result.longDesc || meta.description;
       await wait(1000);
     }
-
+  
     data.push({
       board: meta.board,
       section: meta.section,
@@ -174,12 +190,15 @@ async function downloadImages(boardName, sectionName, shouldFetchVisitSite) {
       imageName
     });
 
-    // Update progress (50-100% for processing)
+    
+    
+  
     chrome.runtime.sendMessage({
       type: 'progress',
       progress: 50 + ((i + 1) / allPins.length) * 50
     });
   }
+  
 
   // Create and download CSV
   const header = ['Board','Section','Title','Description','Links','ImageName'];

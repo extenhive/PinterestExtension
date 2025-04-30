@@ -115,35 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showStatus('Verifying license...', 'success');
 
-  //   try {
-  //     const response = await fetch(`https://sheetdb.io/api/v1/o9l0bgc4xuhln/search?license_key=${encodeURIComponent(licenseKey)}`);
-  //     const data = await response.json();
-
-  //     if (data.length > 0 && data[0].status === 'Active') {
-  //       showStatus('License verified! You can now download unlimited.', 'success');
-  //       downloadBtn.disabled = false;
-  //       verifyLicenseBtn.disabled = true;
-  //       licenseInput.disabled = true;
-  //       addLog('✅ License verified.');
-  //       licenseVerified = true;
-  //       chrome.storage.local.set({ licenseVerified: true });
-  //     } else {
-  //       showStatus('Invalid or expired license.', 'error');
-  //       downloadBtn.disabled = false; // Allow limited download
-  //       licenseVerified = false;
-  //       chrome.storage.local.set({ licenseVerified: false });
-  //       addLog('❌ License verification failed.');
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     showStatus('Error verifying license.', 'error');
-  //     addLog(`Error: ${error.message}`);
-  //   }
-  // }
-
-
   try {
-    const response = await fetch("https://extenhub.com/api/verify", {
+    const response = await fetch("https://extenhub.com/api/verify?refresh=true", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

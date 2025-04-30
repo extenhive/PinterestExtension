@@ -1,1 +1,9 @@
-chrome.runtime.onMessage.addListener(((e,o,a)=>{"download"===e.type&&chrome.downloads.download({url:e.url,filename:e.filename,saveAs:!1})}));
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'download') {
+    chrome.downloads.download({
+      url: message.url,
+      filename: message.filename,
+      saveAs: false
+    });
+  }
+}); 

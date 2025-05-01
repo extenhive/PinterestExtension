@@ -11,13 +11,13 @@ You can enable this by checking the "Fetch Visit Site Links" checkbox, but this 
 **Step 1: Download and unzip the PinterestExtension code. (Green Dropdown in the top right)**
 <img width="936" alt="Screenshot 2025-04-29 at 12 13 17 AM" src="https://github.com/user-attachments/assets/72acdece-aaff-4d0c-9178-ff1ee586a39f" />
 
-**Step 2: Open Chrome and navigate to chrome://extensions/.**
+**Step 2: Open Chrome and navigate to chrome://extensions/. For Edge go to edge://extensions/**  
 
 <img width="1438" alt="Screenshot 2025-04-28 at 11 11 34 PM" src="https://github.com/user-attachments/assets/ff5e91e1-5c27-43e2-84e7-0bf283f4ce25" />
 
 <br><br>
 
-**Step 3: Turn on Developer Mode (toggle at the top right).**
+**Step 3: Turn on Developer Mode (toggle at the top right). (Not required for edge browsers)**
 
 <img width="1438" alt="Screenshot 2025-04-28 at 11 11 54 PM" src="https://github.com/user-attachments/assets/faaaf9fd-650e-4a8d-b784-221809314766" />
 
@@ -26,6 +26,12 @@ You can enable this by checking the "Fetch Visit Site Links" checkbox, but this 
 **Step 4: Click Load Unpacked and select the unzipped folder you downloaded.**
 
 <img width="1104" alt="Screenshot 2025-04-28 at 11 15 11 PM" src="https://github.com/user-attachments/assets/d3edba81-466e-41b6-84fc-d7c023aee1b1" />
+
+<br><br>
+
+**(EXACT SAME PROCESS FOR EDGE)**
+
+<img width="1256" alt="Screenshot 2025-05-01 at 11 34 01 AM" src="https://github.com/user-attachments/assets/d80e794b-48c3-4fa1-bc80-3243fc526993" />
 
 <br><br>
 

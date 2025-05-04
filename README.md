@@ -1,6 +1,6 @@
 # PinterestExtension
 
-**EXTENSION NOW AVAILABLE ON CHROME STORE: https://chromewebstore.google.com/detail/pinterest-pin-and-board-d/mingmclipjkinnihljhkecakfihildja **
+**EXTENSION NOW AVAILABLE ON CHROME STORE: https://chromewebstore.google.com/detail/pinterest-pin-and-board-d/mingmclipjkinnihljhkecakfihildja**
 
 **WITHOUT A LICENSE KEY, DOWNLOADS ARE LIMITED TO 50 PINS.
   Please email extenhive@gmail.com to request a license.**
